@@ -31,8 +31,8 @@ function Home() {
               Shopify
             </Typography>
 
-            <Button color="inherit" onClick={() => { navigate("/signin") }}>Login</Button>
-            <Button color="inherit" onClick={() => { navigate("/registration") }}>Register</Button>
+            <Button color="inherit" onClick={() => { navigate("/signin") }}>Customer</Button>
+            <Button color="inherit" onClick={() => { navigate("/admin/signin") }}>Admin</Button>
           </Toolbar>
         </AppBar>
       </Box>

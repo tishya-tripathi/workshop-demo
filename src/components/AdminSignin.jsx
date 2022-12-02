@@ -12,8 +12,6 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useNavigate } from "react-router-dom";
-
 
 function Copyright(props) {
   return (
@@ -30,9 +28,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function Signin() {
-  const navigate = useNavigate();
-
+export default function AdminSignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -40,9 +36,6 @@ export default function Signin() {
       email: data.get('email'),
       password: data.get('password'),
     });
-
-    // TODO - SignIn API Call
-    
   };
 
   return (
@@ -61,7 +54,7 @@ export default function Signin() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Login
+            ADMIN
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -84,21 +77,15 @@ export default function Signin() {
               id="password"
               autoComplete="current-password"
             />
+
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Login
+              Sign In
             </Button>
-            <Grid container>
-              <Grid item>
-                <Link onClick={()=>navigate("/registration")} variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />

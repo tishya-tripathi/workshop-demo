@@ -1,5 +1,5 @@
 import * as React from "react";
-import Navbar from "./Navbar";
+import AdminNavbar from "./AdminNavbar";
 import { useNavigate } from "react-router-dom";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
@@ -33,8 +33,8 @@ export default function AdminAddProducts() {
     
     return (
         <>
-            <Navbar/>
-            <Container component="form" onSubmit={handleSubmit} margin="2rem" sx={{width:"50%", display:"flex", flexDirection:"column"}}>
+            <AdminNavbar/>
+            <Container component="form" onSubmit={handleSubmit} margin="2rem" sx={{width:"50%", display:"flex", flexDirection:"column", marginTop: "1rem"}}>
             <TextField
               margin="normal"
               required
@@ -58,7 +58,8 @@ export default function AdminAddProducts() {
               required
               label="Product Price"
               name="productPrice"
-            />
+          />
+          <br/>
             <Button type="submit" variant="contained"> Add Product</Button>
             </Container>
         </>

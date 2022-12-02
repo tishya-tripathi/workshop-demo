@@ -1,5 +1,5 @@
 import * as React from "react";
-import Navbar from "./Navbar";
+import AdminNavbar from "./AdminNavbar";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
@@ -90,7 +90,7 @@ export default function AdminViewProducts() {
 
   return (
     <>
-      <Navbar />
+      <AdminNavbar />
       <Box>
         <Grid container spacing={2} marginTop="1rem">
           {data.map((data, index) =>

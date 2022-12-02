@@ -6,6 +6,7 @@ import ViewProducts from './components/ViewProducts';
 import Home from './components/Home';
 import AdminViewProducts from './components/AdminViewProducts';
 import AdminAddProducts from './components/AdminAddProducts';
+import AdminSignIn from './components/AdminSignin';
 import { Route, Routes } from "react-router-dom";
 
 function App() {
@@ -21,6 +22,8 @@ function App() {
       {/* Admin */}
         <Route path="/admin/viewProducts" element={<AdminViewProducts />} />
         <Route path="/admin/addProducts" element={<AdminAddProducts />} />
+        <Route path="/admin/signin" element={<AdminSignIn />} />
+
 
       </Routes>
     </div>
