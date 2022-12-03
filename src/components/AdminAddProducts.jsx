@@ -11,7 +11,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-
+import axios from "axios";
 
 
 export default function AdminAddProducts() {
@@ -29,6 +29,20 @@ export default function AdminAddProducts() {
         }
         console.log("Add Product: ", product)
         // TODO - Call API for adding product
+        const addProduct = async () => {
+          try {
+            await axios.post("http://localhost:8000/addProduct", product,
+              {
+                headers: { "Content-Type": "application/json" },
+                crossDomain: true,
+              }
+            ).then((res) => {
+                console.log(res.data)
+              });
+          }
+          catch(err) {
+            console.log(err);
+          }}
     }
     
     return (

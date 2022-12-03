@@ -12,6 +12,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -29,6 +31,8 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function AdminSignIn() {
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -36,6 +40,32 @@ export default function AdminSignIn() {
       email: data.get('email'),
       password: data.get('password'),
     });
+    const credential = {
+      email: data.get('email'),
+      password: data.get('password'),
+    }
+
+    const signIn = async () => {
+      try {
+        await axios.post("http://localhost:8000/signIn", credential,
+          {
+            headers: { "Content-Type": "application/json" },
+            crossDomain: true,
+          }
+        ).then((res) => {
+            console.log(res.data)
+            if (res.data.status === 200) {
+              navigate("/admin/viewProducts")
+            } else {
+              window.alert("Invalid Credentials")
+            }
+          });
+      }
+      catch(err) {
+        console.log(err);
+      }}
+
+      signIn();
   };
 
   return (
