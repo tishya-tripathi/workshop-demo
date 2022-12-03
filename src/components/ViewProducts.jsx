@@ -1,6 +1,7 @@
 import * as React from "react";
 import Navbar from "./Navbar";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
@@ -10,7 +11,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-
+import axios from "axios";
 
 
 export default function ViewProducts() {
@@ -52,6 +53,26 @@ export default function ViewProducts() {
   ]);
 
   // TODO - Fetch All Products from Backend and store using setData()
+  useEffect(() => {
+    const allProduct = async () => {
+      try {
+        await axios.get("http://localhost:8000/allProduct",
+          {
+            headers: { "Content-Type": "application/json" },
+            crossDomain: true,
+          }
+        ).then((res) => {
+            console.log(res)
+            if (res.status === 200) {
+              setData(res.data)
+            }
+          });
+      }
+      catch(err) {
+        console.log(err);
+      }}
+      allProduct();
+  }, []);
 
 
   const productCard = (name, desc, link, price) => {

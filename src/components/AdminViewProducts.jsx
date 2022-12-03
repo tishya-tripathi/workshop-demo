@@ -1,6 +1,7 @@
 import * as React from "react";
 import AdminNavbar from "./AdminNavbar";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -9,7 +10,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-
+import axios from "axios";
 
 
 export default function AdminViewProducts() {
@@ -51,15 +52,53 @@ export default function AdminViewProducts() {
   ]);
 
   // TODO - Fetch All Products from Backend and store using setData()
-    
+  useEffect(() => {
+    const allProduct = async () => {
+      try {
+        await axios.get("http://localhost:8000/allProduct",
+          {
+            headers: { "Content-Type": "application/json" },
+            crossDomain: true,
+          }
+        ).then((res) => {
+            console.log(res.data)
+            if (res.data.status === 200) {
+              setData(res.data)
+            }
+          });
+      }
+      catch(err) {
+        console.log(err);
+      }}
+      allProduct();
+  },[]);
   
 
   const productCard = (name, desc, link, price) => {
     
-    const deleteProduct = (product) => {
-        console.log("Product to be deleted: ", product);
+    const deleteProduct = async(productName) => {
+        console.log("Product to be deleted: ", productName);
         // TODO - Delete Product
-    }
+          try {
+            await axios.delete("http://localhost:8000/deleteProduct", {productName,
+              headers : {
+                headers: { "Content-Type": "application/json" },
+                crossDomain: true,
+              }
+            }
+            ).then((res) => {
+                console.log(res.data)
+                // if (res.data.status === 200) {
+                //   navigate("/viewProducts")
+                // } else {
+                //   window.alert("Invalid Credentials")
+                // }
+              });
+          }
+          catch(err) {
+            console.log(err);
+          }
+        }
     
       
     return (
