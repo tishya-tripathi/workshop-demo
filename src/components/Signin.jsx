@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 
 function Copyright(props) {
@@ -36,12 +37,35 @@ export default function Signin() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const credential = {
       email: data.get('email'),
       password: data.get('password'),
-    });
+    };
 
     // TODO - SignIn API Call
+
+    const signIn = async () => {
+      try {
+        await axios.post("http://localhost:8000/signIn", credential,
+          {
+            headers: { "Content-Type": "application/json" },
+            crossDomain: true,
+          }
+        ).then((res) => {
+            console.log(res.data)
+            if (res.data.status === 200) {
+              navigate("/viewProducts")
+            } else {
+              window.alert("Invalid Credentials")
+            }
+          });
+      }
+      catch(err) {
+        console.log(err);
+      }
+    }
+
+    signIn();
     
   };
 
