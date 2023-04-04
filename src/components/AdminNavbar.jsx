@@ -28,15 +28,22 @@ function AdminNavbar() {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Shopify
             </Typography>
-            <Button onClick={()=>navigate("/admin/viewProducts")} color="inherit">View Products</Button>
-            <Button onClick={()=>navigate("/admin/addProducts")} color="inherit">Add Products</Button>
+            <Button
+              onClick={() => navigate("/admin/viewProducts")}
+              color="inherit"
+            >
+              View Products
+            </Button>
+            <Button
+              onClick={() => navigate("/admin/addProducts")}
+              color="inherit"
+            >
+              Add Products
+            </Button>
           </Toolbar>
         </AppBar>
       </Box>
     </>
   );
 }
-
-
-
 export default AdminNavbar;
